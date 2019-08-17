@@ -18,26 +18,23 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>User</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Reason</th>
-                                <th>edit</th>
+                                <th>نام</th>
+                                <th>ایمیل</th>
+                                <th>سمت</th>
+                                <th>عملیات</th>
+
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>183</td>
-                                <td>John Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="tag tag-success">Approved</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                           <td>
-                               <a href="">edit
-                               <i class="fas fa-edit"></i>
-                               </a>
-                           </td>
+                            <tr v-for="user in users" :key="user.id">
+                                <td>{{user.name }}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.type}}</td>
+                                <td>
+                                       <a href="">edit
+                                       <i class="fas fa-edit"></i>
+                                       </a>
+                                </td>
                             </tr>
 
                             </tbody>
@@ -106,6 +103,7 @@
     export default {
         data(){
             return {
+                users:{},
                 form: new Form({
                     name: '',
                     email:'',
@@ -119,10 +117,14 @@
         methods: {
             createUser(){
                 this.form.post('api/user');
+            },
+            loadUsers(){
+                axios.get('api/user')
+                    .then(({data})=> (this.users = data.data))
             }
         },
-        mounted() {
-            console.log('Component mounted.')
+       created() {
+            this.loadUsers()
         }
     }
 </script>
