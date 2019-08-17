@@ -186,13 +186,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     </li>
                     <li class="nav-item text-right">
-                        <a href="#" class="nav-link">
-                            <p>
-                                خروج
 
-                            </p>
-                            <i class="nav-icon fas fa-power-off"></i>
-                        </a>
+                            <a class="nav-link" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+
+                                {{ __('Logout') }}
+                                <i class="nav-icon fas fa-power-off"></i>
+
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
 
                     </li>
 
@@ -201,7 +207,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                     <li class="nav-item has-treeview menu-open text-right">
-                        <a href="#" class="nav-link active">
+                        <a href="#" class="nav-link ">
 
                             <p>
                                 مدیریت
@@ -210,15 +216,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#" class="nav-link active">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Active Page</p>
-                                </a>
+                                <router-link to="/users" href="#" class="nav-link ">
+                                    <p>کاربران</p>
+                                    <i class="fas fa-users nav-icon"></i>
+
+                                </router-link>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
                                     <p>Inactive Page</p>
+                                    <i class="fas fa-circle nav-icon"></i>
                                 </a>
                             </li>
                         </ul>

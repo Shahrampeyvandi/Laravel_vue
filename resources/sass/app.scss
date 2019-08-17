@@ -27,7 +27,13 @@
 }
 
 
+.router-link-exact-active{
+    background: #e0a800 !important;
+    color: white !important;
+}
 
+.nav-sidebar > .nav-item > .nav-link:focus {
+    color: #ffffff;
 
-
+}
 
