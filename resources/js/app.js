@@ -7,8 +7,11 @@
 // import Dashboard from "./components/Dashboard";
 
 require('./bootstrap');
-
 import Vue from 'vue';
+import {Form , HasError , AlertError } from 'vform';
+window.Form = Form;
+Vue.component(HasError.name , HasError)
+Vue.component(AlertError.name , AlertError)
 import MainApp from './components/MainApp.vue';
 import VueRouter from 'vue-router';
 import Routes from "./routes";

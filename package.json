@@ -25,6 +25,8 @@
   },
   "dependencies": {
     "admin-lte": "^3.0.0-beta.2",
+    "axios": "^0.18.1",
+    "vform": "^1.0.1",
     "vue-router": "^3.1.2"
   }
 }

@@ -58,7 +58,34 @@
 
                     </div>
                     <div class="modal-body">
-                        ...
+                        <div class="form-group">
+                            <input type="text" v-model="form.name" name="name"
+                            class="form-control text-right" :class="{ 'is-invalid' :
+                            form.errors.has('name') }">
+                            <has-error :form="form" field="name"></has-error>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" v-model="form.email" name="email"
+                                   class="form-control text-right" :class="{ 'is-invalid' :
+                            form.errors.has('email') }">
+                            <has-error :form="form" field="email"></has-error>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" v-model="form.name" name="name"
+                                   class="form-control text-right" :class="{ 'is-invalid' :
+                            form.errors.has('name') }">
+                            <has-error :form="form" field="name"></has-error>
+                        </div>
+                     <div class="form-group">
+                         <select name="type" id="type" v-model="form.type"
+                         class="form-control" :class="{'is-invalid' : form.errors.has('type') }"></select>
+                         <option value="">سمت کاربر را انتخاب کنید</option>
+                         <option value="admin">مدیر</option>
+                         <option value="auther">نویسنده</option>
+                         <option value="user">کاربر عادی</option>
+                     </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
@@ -72,6 +99,18 @@
 
 <script>
     export default {
+        data(){
+            return {
+                form: new Form({
+                    name: '',
+                    email:'',
+                    password:'',
+                    type:'',
+                    bio:'',
+                    photo:''
+                })
+            }
+        },
         mounted() {
             console.log('Component mounted.')
         }
