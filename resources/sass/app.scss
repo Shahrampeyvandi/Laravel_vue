@@ -25,7 +25,12 @@
         z-index: 3000;
     }
 }
+@media (min-width: 576px) {
+    .content-wrapper, .main-footer, .main-header {
 
+        z-index: 10;
+    }
+}
 
 .router-link-exact-active{
     background: #e0a800 !important;
@@ -36,4 +41,10 @@
     color: #ffffff;
 
 }
+.table{
+    direction: rtl !important;
+}
 
+.modal-header{
+    justify-content: flex-end !important;
+}
