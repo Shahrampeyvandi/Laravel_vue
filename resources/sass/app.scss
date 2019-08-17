@@ -1,0 +1,33 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+@import '~admin-lte/dist/css/adminlte.css';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+.main-sidebar {
+                       height: inherit;
+                       min-height: 100%;
+                       position: absolute;
+                       top: 0;
+                       right: 0;
+                   }
+@media (min-width: 576px){
+    .content-wrapper, .main-footer, .main-header {
+        transition: margin-left 0.3s ease-in-out;
+        margin-right: 250px;
+        margin-left:0;
+        z-index: 3000;
+    }
+}
+
+
+
+
+
+
