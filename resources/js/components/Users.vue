@@ -57,40 +57,45 @@
                         <h5 class="modal-title" id="addNewTitle">نام</h5>
 
                     </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input type="text" v-model="form.name" name="name"
-                            class="form-control text-right" :class="{ 'is-invalid' :
-                            form.errors.has('name') }">
-                            <has-error :form="form" field="name"></has-error>
-                        </div>
+                    <form @submit.prevent="createUser">
+                        <div class="modal-body">
 
-                        <div class="form-group">
-                            <input type="email" v-model="form.email" name="email"
-                                   class="form-control text-right" :class="{ 'is-invalid' :
-                            form.errors.has('email') }">
-                            <has-error :form="form" field="email"></has-error>
-                        </div>
+                            <div class="form-group">
+                                <input type="text" v-model="form.name" name="name"
+                                class="form-control text-right" :class="{ 'is-invalid' :
+                                form.errors.has('name') }">
+                                <has-error :form="form" field="name"></has-error>
+                            </div>
 
-                        <div class="form-group">
-                            <input type="text" v-model="form.name" name="name"
-                                   class="form-control text-right" :class="{ 'is-invalid' :
-                            form.errors.has('name') }">
-                            <has-error :form="form" field="name"></has-error>
+                            <div class="form-group">
+                                <input type="email" v-model="form.email" name="email"
+                                       class="form-control text-right" :class="{ 'is-invalid' :
+                                form.errors.has('email') }">
+                                <has-error :form="form" field="email"></has-error>
+                            </div>
+
+
+                         <div class="form-group">
+                             <select name="type" id="type" v-model="form.type"
+                             class="custom-select" :class="{'is-invalid' : form.errors.has('type') }">
+                                 <option value="">سمت کاربر را انتخاب کنید</option>
+                                 <option value="admin">مدیر</option>
+                                 <option value="auther">نویسنده</option>
+                                 <option value="user">کاربر عادی</option>
+                             </select>
+                         </div>
+                            <div class="form-group">
+                                <input type="text" v-model="form.password" name="password"
+                                       class="form-control text-right" :class="{ 'is-invalid' :
+                                form.errors.has('password') }">
+                                <has-error :form="form" field="password"></has-error>
+                            </div>
                         </div>
-                     <div class="form-group">
-                         <select name="type" id="type" v-model="form.type"
-                         class="form-control" :class="{'is-invalid' : form.errors.has('type') }"></select>
-                         <option value="">سمت کاربر را انتخاب کنید</option>
-                         <option value="admin">مدیر</option>
-                         <option value="auther">نویسنده</option>
-                         <option value="user">کاربر عادی</option>
-                     </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-                        <button type="button" class="btn btn-primary">ایجاد کردن</button>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                            <button type="submit" class="btn btn-primary">ایجاد کردن</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -109,6 +114,11 @@
                     bio:'',
                     photo:''
                 })
+            }
+        },
+        methods: {
+            createUser(){
+                this.form.post('api/user');
             }
         },
         mounted() {
