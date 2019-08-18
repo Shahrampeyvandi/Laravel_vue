@@ -30,7 +30,13 @@ Vue.use(VueProgressBar, {
 import Swal from 'sweetalert2';
 window.Swal= Swal;
 
+let Fire = new Vue();
+window.Fire = Fire;
+/***
+or
+window.Fire =new Vue();
 
+ ***/
 
 
 const router = new VueRouter({

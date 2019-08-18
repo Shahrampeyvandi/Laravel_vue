@@ -121,6 +121,7 @@
             createUser(){
                 this.$Progress.start();
                 this.form.post('api/user');
+                Fire.$emit('AfterCreated');
                 $('#addNew').modal('hide');
                 Swal.fire({
                     position: 'top-start',
@@ -140,6 +141,11 @@
         },
        created() {
             this.loadUsers()
+           //use setinterval
+           // setInterval(() => this.loadUsers() ,20000)
+           Fire.$on('AfterCreated' , () => {
+               this.loadUsers();
+           })
         }
     }
 </script>

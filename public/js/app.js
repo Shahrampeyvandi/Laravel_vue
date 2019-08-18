@@ -1935,6 +1935,7 @@ __webpack_require__.r(__webpack_exports__);
     createUser: function createUser() {
       this.$Progress.start();
       this.form.post('api/user');
+      Fire.$emit('AfterCreated');
       $('#addNew').modal('hide');
       Swal.fire({
         position: 'top-start',
@@ -1955,7 +1956,14 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.loadUsers();
+    var _this2 = this;
+
+    this.loadUsers(); //use setinterval
+    // setInterval(() => this.loadUsers() ,20000)
+
+    Fire.$on('AfterCreated', function () {
+      _this2.loadUsers();
+    });
   }
 });
 
@@ -56709,6 +56717,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_progressbar__WEBPACK_IMPORTED
 
 
 window.Swal = sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a;
+var Fire = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
+window.Fire = Fire;
+/***
+or
+window.Fire =new Vue();
+
+ ***/
+
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
   routes: _routes__WEBPACK_IMPORTED_MODULE_4__["default"],
   mode: 'history'
