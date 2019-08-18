@@ -111,6 +111,7 @@
                 editMode:false, //if true so call update method
                 users:{},
                 form: new Form({
+                    id:'',
                     name: '',
                     email:'',
                     password:'',
@@ -154,7 +155,19 @@
             //end CreateUser()
 
             updateUser(){
-
+                this.$Progress.start();
+                this.form.put('api/user/'+this.form.id)
+                    .then(()=>{
+                        Swal.fire(
+                            'اپدیت شد!',
+                        )
+                        //refresh page after delete
+                        this.$Progress.finish();
+                        $('#addNew').modal('hide');
+                        Fire.$emit('AfterCreated');
+                }).catch(()=>{
+                    this.$Progress.fail();
+                })
             },
 
             DeleteUser(id) {

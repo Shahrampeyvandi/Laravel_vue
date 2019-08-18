@@ -1926,6 +1926,7 @@ __webpack_require__.r(__webpack_exports__);
       //if true so call update method
       users: {},
       form: new Form({
+        id: '',
         name: '',
         email: '',
         password: '',
@@ -1967,9 +1968,23 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function () {});
     },
     //end CreateUser()
-    updateUser: function updateUser() {},
-    DeleteUser: function DeleteUser(id) {
+    updateUser: function updateUser() {
       var _this2 = this;
+
+      this.$Progress.start();
+      this.form.put('api/user/' + this.form.id).then(function () {
+        Swal.fire('اپدیت شد!'); //refresh page after delete
+
+        _this2.$Progress.finish();
+
+        $('#addNew').modal('hide');
+        Fire.$emit('AfterCreated');
+      })["catch"](function () {
+        _this2.$Progress.fail();
+      });
+    },
+    DeleteUser: function DeleteUser(id) {
+      var _this3 = this;
 
       Swal.fire({
         title: 'مطمین هستید؟',
@@ -1981,7 +1996,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'حذف'
       }).then(function (result) {
         if (result.value) {
-          _this2.form["delete"]('api/user/' + id).then(function () {
+          _this3.form["delete"]('api/user/' + id).then(function () {
             Swal.fire('حذف شد!'); //refresh page after delete
 
             Fire.$emit('AfterCreated');
@@ -1992,24 +2007,24 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     loadUsers: function loadUsers() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get('api/user').then(function (_ref) {
         var data = _ref.data;
         return (// console.log(data)
-          _this3.users = data.data
+          _this4.users = data.data
         );
       });
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.loadUsers(); //use setinterval
     // setInterval(() => this.loadUsers() ,20000)
 
     Fire.$on('AfterCreated', function () {
-      _this4.loadUsers();
+      _this5.loadUsers();
     });
   }
 });
