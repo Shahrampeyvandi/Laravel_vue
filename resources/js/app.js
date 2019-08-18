@@ -26,6 +26,13 @@ Vue.use(VueProgressBar, {
     speed: '0.2s',
 });
 
+//import sweetalert2
+import Swal from 'sweetalert2';
+window.Swal= Swal;
+
+
+
+
 const router = new VueRouter({
         routes:Routes,
     mode:'history'

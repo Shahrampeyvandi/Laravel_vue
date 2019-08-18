@@ -121,6 +121,15 @@
             createUser(){
                 this.$Progress.start();
                 this.form.post('api/user');
+                $('#addNew').modal('hide');
+                Swal.fire({
+                    position: 'top-start',
+                    type: 'success',
+                    title: 'با موفقیت اضافه شد!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+
                 this.$Progress.finish();
 
             },
