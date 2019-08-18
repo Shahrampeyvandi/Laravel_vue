@@ -120,18 +120,22 @@
         methods: {
             createUser(){
                 this.$Progress.start();
-                this.form.post('api/user');
-                Fire.$emit('AfterCreated');
-                $('#addNew').modal('hide');
-                Swal.fire({
-                    position: 'top-start',
-                    type: 'success',
-                    title: 'با موفقیت اضافه شد!',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                this.form.post('api/user').then( () => {
+                    Fire.$emit('AfterCreated');
+                    $('#addNew').modal('hide');
+                    Swal.fire({
+                        position: 'top-start',
+                        type: 'success',
+                        title: 'با موفقیت اضافه شد!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
 
-                this.$Progress.finish();
+                    this.$Progress.finish();
+                }).catch( () => {
+
+                });
+
 
             },
             loadUsers(){

@@ -1933,36 +1933,40 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     createUser: function createUser() {
+      var _this = this;
+
       this.$Progress.start();
-      this.form.post('api/user');
-      Fire.$emit('AfterCreated');
-      $('#addNew').modal('hide');
-      Swal.fire({
-        position: 'top-start',
-        type: 'success',
-        title: 'با موفقیت اضافه شد!',
-        showConfirmButton: false,
-        timer: 1500
-      });
-      this.$Progress.finish();
+      this.form.post('api/user').then(function () {
+        Fire.$emit('AfterCreated');
+        $('#addNew').modal('hide');
+        Swal.fire({
+          position: 'top-start',
+          type: 'success',
+          title: 'با موفقیت اضافه شد!',
+          showConfirmButton: false,
+          timer: 1500
+        });
+
+        _this.$Progress.finish();
+      })["catch"](function () {});
     },
     loadUsers: function loadUsers() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('api/user').then(function (_ref) {
         var data = _ref.data;
-        return _this.users = data.data;
+        return _this2.users = data.data;
       });
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     this.loadUsers(); //use setinterval
     // setInterval(() => this.loadUsers() ,20000)
 
     Fire.$on('AfterCreated', function () {
-      _this2.loadUsers();
+      _this3.loadUsers();
     });
   }
 });
