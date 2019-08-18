@@ -31,9 +31,12 @@
                                 <td>{{user.email}}</td>
                                 <td>{{user.type}}</td>
                                 <td>
-                                       <a href="">edit
+                                       <a href="">
                                        <i class="fas fa-edit"></i>
                                        </a>
+                                    <a href="" class="mx-2 text-danger" title="حذف">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
                                 </td>
                             </tr>
 
@@ -116,7 +119,10 @@
         },
         methods: {
             createUser(){
+                this.$Progress.start();
                 this.form.post('api/user');
+                this.$Progress.finish();
+
             },
             loadUsers(){
                 axios.get('api/user')
