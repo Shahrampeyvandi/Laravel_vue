@@ -8,6 +8,23 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+//    public function __construct()
+//    {
+//        $this->middleware('auth');  // در api کار نمیکند
+//    }
+//passport information
+//Client secret: 77HqRTGvxPdFoOmGtxeEECubCii2Gwsxoy7PYpML
+//Password grant client created successfully.
+//Client ID: 2
+//Client secret: HW5qDMtpEEpHsKWX5qNgF10XV1VSPs6awCHQKRcy
+
+
     /**
      * Display a listing of the resource.
      *

@@ -176,6 +176,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     </li>
                     <li class="nav-item text-right">
+                        <router-link to="/developer" class="nav-link">
+                            <p>
+                                توسعه دهنده
+
+                            </p>
+                            <i class="nav-icon fas fa-cog"></i>
+                        </router-link>
+
+                    </li>
+                    <li class="nav-item text-right">
 
                             <a class="nav-link" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
