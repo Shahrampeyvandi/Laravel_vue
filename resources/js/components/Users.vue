@@ -32,9 +32,9 @@
                                 <td>{{user.type}}</td>
                                 <td>
                                        <a href="">
-                                       <i class="fas fa-edit"></i>
+                                       <i class="fas fa-edit text-info" title="ویرایش"></i>
                                        </a>
-                                    <a href="" class="mx-2 text-danger" title="حذف">
+                                    <a href="" class="mx-2 text-danger" title="حذف" @click.prevent="DeleteUser(user.id)">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -135,12 +135,39 @@
                 }).catch( () => {
 
                 });
+            },
+            //end CreateUser()
 
-
+            DeleteUser(id) {
+                Swal.fire({
+                    title: 'مطمین هستید؟',
+                    text: "",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'حذف'
+                }).then((result) => {
+                   if (result.value){
+                       this.form.delete('api/user/'+id).then(()=>{
+                           Swal.fire(
+                               'حذف شد!',
+                           )
+                           //refresh page after delete
+                           Fire.$emit('AfterCreated');
+                       }).catch(()=>{
+                           Swal.fire(
+                               'خطا!',
+                           )
+                       })
+                   }
+                })
             },
             loadUsers(){
                 axios.get('api/user')
-                    .then(({data})=> (this.users = data.data))
+                    .then(({data})=> (
+                        // console.log(data)
+                        this.users = data.data));
             }
         },
        created() {

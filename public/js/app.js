@@ -1950,23 +1950,49 @@ __webpack_require__.r(__webpack_exports__);
         _this.$Progress.finish();
       })["catch"](function () {});
     },
-    loadUsers: function loadUsers() {
+    //end CreateUser()
+    DeleteUser: function DeleteUser(id) {
       var _this2 = this;
+
+      Swal.fire({
+        title: 'مطمین هستید؟',
+        text: "",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'حذف'
+      }).then(function (result) {
+        if (result.value) {
+          _this2.form["delete"]('api/user/' + id).then(function () {
+            Swal.fire('حذف شد!'); //refresh page after delete
+
+            Fire.$emit('AfterCreated');
+          })["catch"](function () {
+            Swal.fire('خطا!');
+          });
+        }
+      });
+    },
+    loadUsers: function loadUsers() {
+      var _this3 = this;
 
       axios.get('api/user').then(function (_ref) {
         var data = _ref.data;
-        return _this2.users = data.data;
+        return (// console.log(data)
+          _this3.users = data.data
+        );
       });
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
     this.loadUsers(); //use setinterval
     // setInterval(() => this.loadUsers() ,20000)
 
     Fire.$on('AfterCreated', function () {
-      _this3.loadUsers();
+      _this4.loadUsers();
     });
   }
 });
@@ -41357,7 +41383,24 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(user.type))]),
                       _vm._v(" "),
-                      _vm._m(2, true)
+                      _c("td", [
+                        _vm._m(2, true),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "mx-2 text-danger",
+                            attrs: { href: "", title: "حذف" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.DeleteUser(user.id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-trash" })]
+                        )
+                      ])
                     ])
                   }),
                   0
@@ -41625,16 +41668,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { attrs: { href: "" } }, [
-        _c("i", { staticClass: "fas fa-edit" })
-      ]),
-      _vm._v(" "),
-      _c(
-        "a",
-        { staticClass: "mx-2 text-danger", attrs: { href: "", title: "حذف" } },
-        [_c("i", { staticClass: "fas fa-trash" })]
-      )
+    return _c("a", { attrs: { href: "" } }, [
+      _c("i", {
+        staticClass: "fas fa-edit text-info",
+        attrs: { title: "ویرایش" }
+      })
     ])
   },
   function() {
