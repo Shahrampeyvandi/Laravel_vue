@@ -6,7 +6,7 @@
                     <div class="card-header">
                         <h3 class="card-title">مشاهده کاربران</h3>
                     <div class="card-tools">
-                        <button type="button" class="btn btn-primary"
+                        <button @click="newModel" type="button" class="btn btn-primary"
                                 data-toggle="modal" data-target="#addNew">
                             <i class="fas fa-user-plus"></i>
                             افزودن کاربر</button>
@@ -31,7 +31,7 @@
                                 <td>{{user.email}}</td>
                                 <td>{{user.type}}</td>
                                 <td>
-                                       <a href="">
+                                       <a href="" @click.prevent="editModel(user)">
                                        <i class="fas fa-edit text-info" title="ویرایش"></i>
                                        </a>
                                     <a href="" class="mx-2 text-danger" title="حذف" @click.prevent="DeleteUser(user.id)">
@@ -118,6 +118,17 @@
             }
         },
         methods: {
+            newModel(){
+                //reset fields for next item
+                    this.form.reset();
+                    $('#addNew').modal('show');
+            },
+            editModel(user){
+                    this.form.reset();
+                    $('#addNew').modal('show');
+                    this.form.fill(user);
+            },
+
             createUser(){
                 this.$Progress.start();
                 this.form.post('api/user').then( () => {

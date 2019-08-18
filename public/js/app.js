@@ -1932,6 +1932,16 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    newModel: function newModel() {
+      //reset fields for next item
+      this.form.reset();
+      $('#addNew').modal('show');
+    },
+    editModel: function editModel(user) {
+      this.form.reset();
+      $('#addNew').modal('show');
+      this.form.fill(user);
+    },
     createUser: function createUser() {
       var _this = this;
 
@@ -41364,14 +41374,35 @@ var render = function() {
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-12" }, [
         _c("div", { staticClass: "card" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "card-header" }, [
+            _c("h3", { staticClass: "card-title" }, [_vm._v("مشاهده کاربران")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-tools" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "modal",
+                    "data-target": "#addNew"
+                  },
+                  on: { click: _vm.newModel }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-user-plus" }),
+                  _vm._v("\n                        افزودن کاربر")
+                ]
+              )
+            ])
+          ]),
           _vm._v(" "),
           _c(
             "div",
             { staticClass: "card-body table-responsive p-0 text-right" },
             [
               _c("table", { staticClass: "table table-hover" }, [
-                _vm._m(1),
+                _vm._m(0),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -41384,7 +41415,24 @@ var render = function() {
                       _c("td", [_vm._v(_vm._s(user.type))]),
                       _vm._v(" "),
                       _c("td", [
-                        _vm._m(2, true),
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.editModel(user)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fas fa-edit text-info",
+                              attrs: { title: "ویرایش" }
+                            })
+                          ]
+                        ),
                         _vm._v(" "),
                         _c(
                           "a",
@@ -41433,7 +41481,7 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "form",
@@ -41611,7 +41659,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(4)
+                  _vm._m(2)
                 ]
               )
             ])
@@ -41626,32 +41674,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [_vm._v("مشاهده کاربران")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            attrs: {
-              type: "button",
-              "data-toggle": "modal",
-              "data-target": "#addNew"
-            }
-          },
-          [
-            _c("i", { staticClass: "fas fa-user-plus" }),
-            _vm._v("\n                        افزودن کاربر")
-          ]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v("نام")]),
@@ -41662,17 +41684,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("عملیات")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "" } }, [
-      _c("i", {
-        staticClass: "fas fa-edit text-info",
-        attrs: { title: "ویرایش" }
-      })
     ])
   },
   function() {
