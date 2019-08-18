@@ -54,10 +54,11 @@
             <div class="modal-dialog model-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addNewTitle">نام</h5>
+                        <h5 v-if="!editMode" class="modal-title" id="addNewTitle">ایجاد کاربر</h5>
+                        <h5 v-if="editMode" class="modal-title" id="addNewTitle">اپدیت کاربر</h5>
 
                     </div>
-                    <form @submit.prevent="createUser">
+                    <form @submit.prevent="editMode ? updateUser() : createUser()">
                         <div class="modal-body">
 
                             <div class="form-group">
@@ -93,7 +94,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-                            <button type="submit" class="btn btn-primary">ایجاد کردن</button>
+                            <button v-if="!editMode" type="submit" class="btn btn-primary">ایجاد کردن</button>
+                            <button v-if="editMode" type="submit" class="btn btn-primary">اپدیت</button>
                         </div>
                     </form>
                 </div>
@@ -106,6 +108,7 @@
     export default {
         data(){
             return {
+                editMode:false, //if true so call update method
                 users:{},
                 form: new Form({
                     name: '',
@@ -120,10 +123,12 @@
         methods: {
             newModel(){
                 //reset fields for next item
+                    this.editMode = false;
                     this.form.reset();
                     $('#addNew').modal('show');
             },
             editModel(user){
+                    this.editMode = true;
                     this.form.reset();
                     $('#addNew').modal('show');
                     this.form.fill(user);
@@ -141,13 +146,16 @@
                         showConfirmButton: false,
                         timer: 1500
                     })
-
                     this.$Progress.finish();
                 }).catch( () => {
 
                 });
             },
             //end CreateUser()
+
+            updateUser(){
+
+            },
 
             DeleteUser(id) {
                 Swal.fire({

@@ -1917,9 +1917,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      editMode: false,
+      //if true so call update method
       users: {},
       form: new Form({
         name: '',
@@ -1934,10 +1938,12 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     newModel: function newModel() {
       //reset fields for next item
+      this.editMode = false;
       this.form.reset();
       $('#addNew').modal('show');
     },
     editModel: function editModel(user) {
+      this.editMode = true;
       this.form.reset();
       $('#addNew').modal('show');
       this.form.fill(user);
@@ -1961,6 +1967,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function () {});
     },
     //end CreateUser()
+    updateUser: function updateUser() {},
     DeleteUser: function DeleteUser(id) {
       var _this2 = this;
 
@@ -41481,7 +41488,29 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
+              _c("div", { staticClass: "modal-header" }, [
+                !_vm.editMode
+                  ? _c(
+                      "h5",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "addNewTitle" }
+                      },
+                      [_vm._v("ایجاد کاربر")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.editMode
+                  ? _c(
+                      "h5",
+                      {
+                        staticClass: "modal-title",
+                        attrs: { id: "addNewTitle" }
+                      },
+                      [_vm._v("اپدیت کاربر")]
+                    )
+                  : _vm._e()
+              ]),
               _vm._v(" "),
               _c(
                 "form",
@@ -41489,7 +41518,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.createUser($event)
+                      _vm.editMode ? _vm.updateUser() : _vm.createUser()
                     }
                   }
                 },
@@ -41659,7 +41688,38 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(2)
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("بستن")]
+                    ),
+                    _vm._v(" "),
+                    !_vm.editMode
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("ایجاد کردن")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.editMode
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("اپدیت")]
+                        )
+                      : _vm._e()
+                  ])
                 ]
               )
             ])
@@ -41684,37 +41744,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("عملیات")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title", attrs: { id: "addNewTitle" } }, [
-        _vm._v("نام")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("بستن")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("ایجاد کردن")]
-      )
     ])
   }
 ]

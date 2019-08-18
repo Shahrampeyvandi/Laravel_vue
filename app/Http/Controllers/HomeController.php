@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\User;
 class HomeController extends Controller
 {
     /**
@@ -25,4 +25,10 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    // public function get()
+    // {
+    //     $user= User::latest()->paginate(10);
+    //     return $user;
+    // }
 }
